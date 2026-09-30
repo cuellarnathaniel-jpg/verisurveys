@@ -1,0 +1,412 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>VeriSurveys (prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth}body{margin:0}[id]{scroll-margin-top:72px}
+/* =========================================================
+   VeriSurveys brand layer for Power Pages
+   Upload in Design Studio: Styling > ... > Manage CSS > Upload,
+   and keep it LAST in the list so it wins over theme.css / bootstrap.
+   Everything is scoped under .vs so it cannot leak into the
+   Power Pages header/profile/sign-in chrome.
+   Font: add to Web Template "Header" or Site Settings > Head/Bottom:
+   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+   ========================================================= */
+:root {
+  --vs-crimson: #B21F24;
+  --vs-crimson-hover: #C02B0A;
+  --vs-ink: #111111;
+  --vs-body: #333333;
+  --vs-muted: #777777;
+  --vs-border: #D0D0D0;
+  --vs-light: #F7F6F6;
+  --vs-footer: #1a1a1a;
+  --vs-white: #FFFFFF;
+  --vs-max: 1120px;
+}
+
+.vs, .vs * { box-sizing: border-box; }
+.vs {
+  font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--vs-body);
+  background: var(--vs-white);
+  -webkit-font-smoothing: antialiased;
+}
+.vs p { margin: 0 0 1em; }
+.vs a { color: var(--vs-crimson); }
+.vs a:hover { color: var(--vs-crimson-hover); }
+.vs :focus-visible { outline: 3px solid var(--vs-crimson); outline-offset: 3px; }
+
+.vs-wrap { width: 100%; max-width: var(--vs-max); margin: 0 auto; padding: 0 20px; }
+.vs-narrow { max-width: 760px; }
+.vs-section { padding: 64px 0; }
+.vs-section--light { background: var(--vs-light); }
+.vs-center { text-align: center; }
+.vs p.vs-narrow { margin-left: auto; margin-right: auto; }
+
+/* ---------- Top bar + wordmark ---------- */
+.vs-topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--vs-border);
+}
+.vs-topbar .vs-wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+.vs-wordmark { font-size: 26px; letter-spacing: .2px; color: var(--vs-ink); text-decoration: none; line-height: 1; }
+.vs-wordmark b { font-weight: 700; color: var(--vs-crimson); }
+.vs-wordmark span { font-weight: 300; }
+.vs-wordmark:hover { color: var(--vs-ink); }
+
+/* ---------- Buttons: solid crimson pill ---------- */
+.vs-btn,
+.vs .entity-form input[type="submit"],
+.vs .entity-form input[type="button"],
+.vs .entity-form button.btn-primary,
+.vs .crmEntityFormView .actions .btn {
+  display: inline-block;
+  font-family: inherit; font-weight: 700; font-size: 16px; letter-spacing: .4px;
+  color: var(--vs-white) !important;
+  background: var(--vs-crimson) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 14px 34px; min-height: 48px;
+  text-decoration: none; cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+.vs-btn:hover,
+.vs .entity-form input[type="submit"]:hover,
+.vs .crmEntityFormView .actions .btn:hover { background: var(--vs-crimson-hover) !important; transform: translateY(-1px); }
+.vs-btn--sm { padding: 9px 22px; min-height: 40px; font-size: 14px; }
+
+/* ---------- Hero ---------- */
+.vs-hero { padding: 72px 0 64px; text-align: center; }
+.vs-kicker { font-weight: 700; font-size: 13px; letter-spacing: 4px; color: var(--vs-crimson); margin-bottom: 18px; }
+.vs-hero h1 {
+  font-weight: 300; font-size: 34px; line-height: 1.2; color: var(--vs-ink);
+  margin: 0 0 14px;
+}
+.vs-hero h1 b { font-weight: 700; }
+.vs-sub { font-weight: 700; font-size: 18px; color: var(--vs-ink); margin-bottom: 22px; }
+.vs .vs-trust {
+  font-size: 15px; color: var(--vs-muted);
+  border-left: 3px solid var(--vs-crimson);
+  text-align: left; padding: 4px 0 4px 16px; margin: 28px auto 32px;
+}
+
+/* ---------- Section headers: ALL CAPS, two weights, keyword bold red ---------- */
+.vs-h2 {
+  font-weight: 300; font-size: 26px; line-height: 1.25;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--vs-ink); text-align: center; margin: 0 0 12px;
+}
+.vs-h2 b { font-weight: 700; color: var(--vs-crimson); }
+.vs-rule { width: 56px; height: 3px; background: var(--vs-crimson); border: 0; margin: 0 auto 32px; }
+.vs .vs-caption { text-align: center; color: var(--vs-muted); font-style: italic; margin: 32px auto 0; max-width: 680px; }
+
+/* ---------- Check grids ---------- */
+.vs-checks { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 14px; grid-template-columns: 1fr; }
+.vs-checks li {
+  position: relative; background: var(--vs-white);
+  border: 1px solid var(--vs-border); border-radius: 10px;
+  padding: 16px 18px 16px 52px; color: var(--vs-ink);
+}
+.vs-checks li::before {
+  content: ""; position: absolute; left: 16px; top: 17px; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--vs-crimson) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/16px no-repeat;
+}
+
+/* ---------- Card grid (types of research) ---------- */
+.vs-cards { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 8px; }
+.vs-card {
+  background: var(--vs-white); border: 1px solid var(--vs-border); border-radius: 12px;
+  padding: 28px 20px; text-align: center;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.vs-card:hover { border-color: var(--vs-crimson); box-shadow: 0 8px 24px rgba(17,17,17,.07); transform: translateY(-2px); }
+.vs-card svg { width: 44px; height: 44px; stroke: var(--vs-crimson); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 14px; }
+.vs-card h3 { font-weight: 700; font-size: 17px; color: var(--vs-ink); margin: 0 0 4px; }
+.vs-card p { font-size: 14px; color: var(--vs-muted); margin: 0; }
+
+/* ---------- Rewards: crimson accent panel ---------- */
+.vs-rewards { background: var(--vs-crimson); color: var(--vs-white); border-radius: 16px; padding: 44px 24px; }
+.vs-rewards .vs-h2, .vs-rewards .vs-h2 b { color: var(--vs-white); }
+.vs-rewards .vs-rule { background: var(--vs-white); }
+.vs-rewards ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+.vs-rewards li {
+  border: 1px solid rgba(255,255,255,.45); border-radius: 999px;
+  padding: 12px 20px; text-align: center; font-weight: 700;
+}
+.vs .vs-rewards .vs-caption { color: rgba(255,255,255,.88); }
+
+/* ---------- FAQ accordion (native details = no JS, keyboard-safe) ---------- */
+.vs-faq details { border-bottom: 1px solid var(--vs-border); }
+.vs-faq details:first-of-type { border-top: 1px solid var(--vs-border); }
+.vs-faq summary {
+  list-style: none; cursor: pointer; position: relative;
+  padding: 20px 44px 20px 0; font-weight: 700; color: var(--vs-ink);
+}
+.vs-faq summary::-webkit-details-marker { display: none; }
+.vs-faq summary::after {
+  content: "+"; position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  font-weight: 300; font-size: 28px; color: var(--vs-crimson); line-height: 1;
+}
+.vs-faq details[open] summary::after { content: "\2212"; }
+.vs-faq details p { padding: 0 0 20px; margin: 0; }
+
+/* ---------- Join form ---------- */
+.vs-join { background: var(--vs-white); border: 1px solid var(--vs-border); border-radius: 16px; padding: 28px 20px; box-shadow: 0 10px 30px rgba(17,17,17,.06); }
+.vs-field { margin-bottom: 16px; }
+.vs-row { display: grid; gap: 0 16px; grid-template-columns: 1fr; }
+.vs label, .vs .entity-form .field-label { display: block; font-weight: 700; font-size: 14px; color: var(--vs-ink); margin-bottom: 6px; }
+.vs label small { font-weight: 400; color: var(--vs-muted); }
+.vs input[type="text"], .vs input[type="email"], .vs input[type="tel"],
+.vs .entity-form input.form-control, .vs .entity-form select.form-control {
+  width: 100%; font-family: inherit; font-size: 16px; /* 16px stops iOS zoom-on-focus */
+  color: var(--vs-ink); background: var(--vs-white);
+  border: 1px solid var(--vs-border); border-radius: 10px;
+  padding: 12px 14px; min-height: 48px; box-shadow: none;
+}
+.vs input:focus, .vs .entity-form input.form-control:focus { border-color: var(--vs-crimson); outline: 0; box-shadow: 0 0 0 3px rgba(178,31,36,.15); }
+.vs-consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--vs-body); margin: 8px 0 22px; }
+.vs-consent input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--vs-crimson); flex: 0 0 auto; }
+.vs-consent label { font-weight: 400; font-size: 14px; margin: 0; color: var(--vs-body); }
+.vs-join .vs-btn, .vs .entity-form input[type="submit"] { width: 100%; }
+.vs-formnote { font-size: 13px; color: var(--vs-muted); text-align: center; margin: 14px 0 0; }
+.vs-error { color: var(--vs-crimson); font-size: 13px; margin-top: 4px; display: none; }
+.vs-field.is-bad input { border-color: var(--vs-crimson); }
+.vs-field.is-bad .vs-error { display: block; }
+.vs-success { display: none; text-align: center; padding: 20px 0; }
+.vs-success h3 { font-weight: 700; color: var(--vs-ink); margin: 0 0 8px; }
+/* Power Pages basic-form cleanup: kill the table chrome, stack cells */
+.vs .entity-form table.section, .vs .entity-form table.section tbody,
+.vs .entity-form table.section tr, .vs .entity-form table.section td { display: block; width: 100% !important; border: 0; padding: 0; }
+.vs .entity-form td.cell { margin-bottom: 16px; }
+.vs .entity-form fieldset { border: 0; padding: 0; margin: 0; }
+.vs .entity-form legend, .vs .entity-form .tab-title { display: none; }
+.vs .entity-form .validation-summary { border: 1px solid var(--vs-crimson); border-radius: 10px; background: #fdf3f3; color: var(--vs-crimson); padding: 12px 16px; }
+.vs .entity-form .required:after, .vs .entity-form .info.required label:after { color: var(--vs-crimson); }
+
+/* ---------- Footer ---------- */
+.vs-footer { background: var(--vs-footer); color: #bdbdbd; padding: 48px 0 32px; font-size: 15px; text-align: center; }
+.vs-footer .vs-wordmark { color: var(--vs-white); display: inline-block; margin-bottom: 16px; }
+.vs-footer a { color: var(--vs-white); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.3); }
+.vs-footer a:hover { color: var(--vs-white); border-color: var(--vs-white); }
+.vs-contact { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+.vs-legal { margin-top: 28px; padding-top: 20px; border-top: 1px solid #333; font-size: 13px; color: #8a8a8a; }
+
+/* ---------- Breakpoints (mobile-first: everything above is the phone layout) ---------- */
+@media (min-width: 600px) {
+  .vs-checks { grid-template-columns: 1fr 1fr; }
+  .vs-cards { grid-template-columns: repeat(2, 1fr); }
+  .vs-rewards ul { grid-template-columns: 1fr 1fr; }
+  .vs-row { grid-template-columns: 1fr 1fr; }
+  .vs-join { padding: 36px; }
+  .vs-contact { grid-auto-flow: column; justify-content: center; gap: 28px; }
+}
+@media (min-width: 900px) {
+  .vs { font-size: 18px; }
+  .vs-section { padding: 88px 0; }
+  .vs-hero { padding: 104px 0 88px; }
+  .vs-hero h1 { font-size: 50px; }
+  .vs-sub { font-size: 21px; }
+  .vs-h2 { font-size: 32px; }
+  .vs-checks { grid-template-columns: repeat(3, 1fr); }
+  .vs-cards { grid-template-columns: repeat(5, 1fr); }
+  .vs-rewards { padding: 64px 48px; }
+  .vs-rewards ul { grid-template-columns: repeat(5, 1fr); }
+  .vs-rewards li { border-radius: 14px; padding: 18px 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .vs * { transition: none !important; } }
+</style></head><body><div style="background:#111;color:#fff;font:700 12px Lato,Arial;letter-spacing:1px;text-align:center;padding:8px 12px">PROTOTYPE. NOT LIVE. FORM STORES NOTHING. PHONE AND ADDRESS ARE UNCONFIRMED PLACEHOLDERS.</div>
+<!-- VeriSurveys home page. Paste into the Home page's "Page Copy" via Design Studio > Edit code (VS Code for the Web).
+     Copy is verbatim from the brief. Phone + address are UNCONFIRMED PLACEHOLDERS. -->
+<div class="vs">
+
+  <header class="vs-topbar">
+    <div class="vs-wrap">
+      <a class="vs-wordmark" href="#top" aria-label="VeriSurveys home"><b>Veri</b><span>Surveys</span></a>
+      <a class="vs-btn vs-btn--sm" href="#join">Join the Community</a>
+    </div>
+  </header>
+
+  <section class="vs-hero" id="top">
+    <div class="vs-wrap vs-narrow">
+      <div class="vs-kicker">VERISURVEYS</div>
+      <h1>Your Opinion Has <b>Power</b> at VeriSurveys</h1>
+      <p class="vs-sub">Real People. Real Opinions. Real Impact.</p>
+      <p>Every day, companies make decisions that impact the products you buy, the services you use, and the experiences you have. What if your voice could help shape those decisions? From healthcare and technology to retail, travel, financial services, and consumer products, organizations depend on real feedback from real people — and we value your time and effort through rewards and incentives.</p>
+      <p class="vs-trust">We will never try to sell you anything. We will not use your information for direct marketing purposes. Nor will we share your personal information with any third-party company without your explicit consent.</p>
+      <a class="vs-btn" href="#join">Join the Community</a>
+    </div>
+  </section>
+
+  <section class="vs-section vs-section--light" id="how">
+    <div class="vs-wrap">
+      <h2 class="vs-h2">How Does <b>Research</b> Work</h2>
+      <hr class="vs-rule">
+      <p class="vs-center vs-wrap vs-narrow">Veridata Insights supports hundreds of research surveys monthly, looking for business professionals and consumers like you. VeriSurveys is an easy way for you to share your opinions on a variety of topics. All you need to do is click on the survey link or respond to the research invitation that was sent to you.</p>
+      <ul class="vs-checks">
+        <li>No cost to join.</li>
+        <li>Flexible participation.</li>
+        <li>Real rewards &amp; incentives.</li>
+        <li>Your voice matters.</li>
+        <li>No commitment — participate as much or as little as you want.</li>
+        <li>Quick studies from anywhere, or deeper research like one-on-one interviews.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="vs-section" id="types">
+    <div class="vs-wrap">
+      <h2 class="vs-h2">Types of <b>Research</b></h2>
+      <hr class="vs-rule">
+      <div class="vs-cards">
+        <div class="vs-card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="8" width="36" height="24" rx="3"/><path d="M18 40h12M24 32v8M14 17l3 3 5-6M27 16h8M27 23h8"/></svg>
+          <h3>Online Surveys</h3>
+        </div>
+        <div class="vs-card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5l17 9v20l-17 9-17-9V14z"/><path d="M7 14l17 9 17-9M24 23v20"/></svg>
+          <h3>Product Testing</h3>
+        </div>
+        <div class="vs-card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="15" r="6"/><circle cx="9" cy="20" r="4.5"/><circle cx="39" cy="20" r="4.5"/><path d="M13 40c0-7 5-12 11-12s11 5 11 12M2 38c0-5 3-9 7-9M46 38c0-5-3-9-7-9"/></svg>
+          <h3>Focus Groups</h3>
+          <p>In-person or from home/office</p>
+        </div>
+        <div class="vs-card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 9h24v17H16l-7 6v-6H5z"/><path d="M33 19h10v15h-4v5l-6-5h-9v-4"/></svg>
+          <h3>One-on-One Interviews</h3>
+        </div>
+        <div class="vs-card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="7" width="36" height="34" rx="3"/><path d="M6 16h36M13 24h14M13 31h22M33 24h2"/></svg>
+          <h3>Online Communities / Bulletin Boards</h3>
+        </div>
+      </div>
+      <p class="vs-caption">Your perspectives can help shape the future. Your thoughts are valuable.</p>
+    </div>
+  </section>
+
+  <section class="vs-section vs-section--light" id="rewards">
+    <div class="vs-wrap">
+      <div class="vs-rewards">
+        <h2 class="vs-h2"><b>Rewards</b></h2>
+        <hr class="vs-rule">
+        <ul>
+          <li>Gift cards</li>
+          <li>Cash incentives</li>
+          <li>Points-based rewards</li>
+          <li>Exclusive participation opportunities</li>
+          <li>Special research programs</li>
+        </ul>
+        <p class="vs-caption">Reward amounts vary by study and are communicated before participation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="vs-section" id="commitment">
+    <div class="vs-wrap">
+      <h2 class="vs-h2">Our <b>Commitment</b> to You</h2>
+      <hr class="vs-rule">
+      <ul class="vs-checks">
+        <li>Participation is always voluntary</li>
+        <li>Your information is protected</li>
+        <li>You control your participation preferences</li>
+        <li>We respect your time</li>
+        <li>We maintain strict quality standards</li>
+        <li>We never compromise on privacy</li>
+      </ul>
+      <p class="vs-caption">Our goal is simple: create a trusted community where people feel comfortable sharing their perspectives and experiences.</p>
+    </div>
+  </section>
+
+  <section class="vs-section vs-section--light" id="join">
+    <div class="vs-wrap vs-narrow">
+      <h2 class="vs-h2">Join the <b>Community</b></h2>
+      <hr class="vs-rule">
+      <div class="vs-join">
+        <form id="vsJoin" novalidate>
+          <div class="vs-row">
+            <div class="vs-field"><label for="fn">First name</label><input id="fn" name="firstname" type="text" autocomplete="given-name" required><div class="vs-error">Please enter your first name.</div></div>
+            <div class="vs-field"><label for="ln">Last name</label><input id="ln" name="lastname" type="text" autocomplete="family-name" required><div class="vs-error">Please enter your last name.</div></div>
+          </div>
+          <div class="vs-row">
+            <div class="vs-field"><label for="em">Email</label><input id="em" name="email" type="email" autocomplete="email" inputmode="email" required><div class="vs-error">Please enter a valid email address.</div></div>
+            <div class="vs-field"><label for="zp">ZIP code <small>(optional)</small></label><input id="zp" name="zip" type="text" autocomplete="postal-code" inputmode="numeric" pattern="\d{5}(-\d{4})?" maxlength="10"><div class="vs-error">ZIP should be 5 digits.</div></div>
+          </div>
+          <div class="vs-field vs-consent">
+            <input id="cs" name="consent" type="checkbox" required>
+            <label for="cs">I agree to be contacted by VeriSurveys about research opportunities and I have read the <a href="#faq">Privacy Policy</a>.<span class="vs-error">Please check the box to join.</span></label>
+          </div>
+          <button class="vs-btn" type="submit">Join the Community</button>
+          <p class="vs-formnote">We will never sell your information. You can leave the community at any time.</p>
+        </form>
+        <div class="vs-success" id="vsOk" role="status">
+          <h3>Welcome to VeriSurveys.</h3>
+          <p>Prototype mode: nothing was sent or stored. In the Power Pages build this row lands in Dataverse and the confirmation email goes out.</p>
+          <pre id="vsPayload" style="text-align:left;font-size:12px;background:#F7F6F6;border:1px solid #D0D0D0;border-radius:10px;padding:12px;overflow:auto"></pre>
+        </div>
+<script>
+(function(){
+  var f=document.getElementById('vsJoin');
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); var ok=true;
+    f.querySelectorAll('.vs-field').forEach(function(w){
+      var i=w.querySelector('input'); var good=i.type==='checkbox'?i.checked:i.checkValidity();
+      w.classList.toggle('is-bad',!good); if(!good) ok=false;
+    });
+    if(!ok){ f.querySelector('.is-bad input').focus(); return; }
+    var qs=new URLSearchParams(location.search);
+    var row={firstname:f.firstname.value.trim(),lastname:f.lastname.value.trim(),email:f.email.value.trim().toLowerCase(),
+      zip:f.zip.value.trim(),consent:true,consent_timestamp:new Date().toISOString(),
+      utm_source:qs.get('utm_source')||'',utm_medium:qs.get('utm_medium')||'',utm_campaign:qs.get('utm_campaign')||'',
+      referrer:document.referrer||'direct'};
+    document.getElementById('vsPayload').textContent='Row that would be written to Dataverse:\n'+JSON.stringify(row,null,2);
+    f.style.display='none'; document.getElementById('vsOk').style.display='block';
+  });
+})();
+</script>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="vs-section" id="faq">
+    <div class="vs-wrap vs-narrow vs-faq">
+      <h2 class="vs-h2">Frequently Asked <b>Questions</b></h2>
+      <hr class="vs-rule">
+      <details>
+        <summary>Do I have to officially join a community to participate in the research opportunity I was invited to?</summary>
+        <p>No. You can participate in the one-time research opportunity by clicking on the survey link that was provided to you.</p>
+      </details>
+      <details>
+        <summary>Is there a cost for participating?</summary>
+        <p>There is no cost, and if you qualify for the survey you will earn rewards.</p>
+      </details>
+      <details>
+        <summary>Do I have to participate in every opportunity?</summary>
+        <p>No. You choose which invitations you want.</p>
+      </details>
+      <details>
+        <summary>Is my personal information protected?</summary>
+        <p>Yes. We are committed to protecting member information and maintaining high standards of privacy and security. <a href="/privacy-policy">Privacy Policy</a></p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="vs-footer">
+    <div class="vs-wrap">
+      <span class="vs-wordmark"><b>Veri</b><span>Surveys</span></span>
+      <p>VeriSurveys is owned and operated by Veridata Insights, a marketing research company headquartered in Texas.</p>
+      <ul class="vs-contact">
+        <li><a href="mailto:info@verisurveys.com">info@verisurveys.com</a></li>
+        <li><a href="tel:+18885178783">(888) 517-8783</a></li>
+        <li>Suite 300, 5 Cowboys Way, Frisco, TX 75034</li>
+      </ul>
+      <div class="vs-legal"><a href="/privacy-policy">Privacy Policy</a></div>
+    </div>
+  </footer>
+
+</div>
+</body></html>
